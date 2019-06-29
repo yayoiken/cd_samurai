@@ -1,0 +1,20 @@
+<div>
+<%= link_to "商品一覧へ", admins_products_path %><br>
+<%= link_to "商品の追加" , new_admins_product_path %><br>
+<%= link_to "ユーザー情報一覧" , admins_clients_path %><br>
+</div>
+
+<h1> 商品一覧画面（管理者側）</h1>
+
+<% @clients.each do |client| %>
+
+<%= client.id %>
+<%= client.last_name + client.first_name %>
+<%= client.email %>
+
+<%= link_to "詳細" , admins_client_path(client) %>
+<%= link_to "削除" , admins_client_path(client), method: :delete %><br>
+
+<% end %>
+
+ <%= link_to('Logout', destroy_admin_session_path, :method => :delete) %>
