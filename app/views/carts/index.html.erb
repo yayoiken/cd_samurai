@@ -1,0 +1,6 @@
+<div>
+<% @carts.each do |f| %>
+<%= f.product.cd_title %><br>
+<% end %>
+</div>
+<%= link_to "商品一覧へ" , products_path %>
