@@ -16,11 +16,15 @@
   	  <td><%= user.id %></td>
 	  <td><%= user.last_name + user.first_name %></td>
 	  <td><%= user.email %></td>
+    <% if user.deleted_at == nil %>
+    	  <td><%= link_to "詳細" , admins_user_path(user) %>
+    	  </td>
+    <% else %>
+        <td>
+          <span style="color: red;">退会済</span>
+        </td>
+    <% end %>
 
-	  <td><%= link_to "詳細" , admins_user_path(user) %> ｜
-		  <%= link_to "編集" , edit_admins_user_path(user) %> ｜
-		  <%= link_to "削除" , admins_user_path(user), method: :delete %><br>
-	  </td>
 	<% end %>
     </tr>
   </tbody>
