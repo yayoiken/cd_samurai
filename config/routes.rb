@@ -9,7 +9,8 @@ Rails.application.routes.draw do
   resources :addresses
 # 商品
   resources :orders, only: [:new,:show,:create] do
-    resources :order_products, only: [:index,:new,:show,:create]
+    post :confirm, action: :confirm, on: :new
+    resources :order_products, only: [:new,:show,:create]
   end
   #cart情報
   resources :products do
