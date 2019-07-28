@@ -7,6 +7,17 @@ class ApplicationController < ActionController::Base
 
   before_action :set_search
 
+  after_action  :store_location
+
+  def store_location
+    if (request.fullpath != "/users/sign_in" &&
+        request.fullpath != "/users/sign_up" &&
+        request.fullpath !~ Regexp.new("\\A/users/password.*\\z") &&
+        !request.xhr?) # don't store ajax calls
+      session[:previous_url] = request.fullpath 
+    end
+  end
+
 
 # ransack
   def set_search

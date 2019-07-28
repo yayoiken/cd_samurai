@@ -8,10 +8,16 @@ class AddressesController < ApplicationController
   end
 
   def create
+    path = Rails.application.routes.recognize_path(request.referer)
     @address = Address.new(address_params)
     @address.user_id = current_user.id
     @address.save
-    redirect_to user_path(current_user.id)
+    # binding.pry
+    if path[:format] != nil
+      redirect_to new_order_path
+    else
+      redirect_to user_path(current_user.id)
+    end
   end
 
   def update
