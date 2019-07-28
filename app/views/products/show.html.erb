@@ -42,14 +42,20 @@
 </div>
 
 <div class="col-xs-10", style="text-align: right;">
-   <% if @product.cart_by(current_user) %>
-   <%= link_to carts_path  do %>
-   <% @product.cart_add(current_user) %>
-　　<p style="text-align: right;"><strong>カートに入れる</strong></p>
-   <% end %>
-   <%else%>
-	<%= link_to product_carts_path(@product), method: :post do %>
-		<p style="text-align: right;"><strong>カートに入れる</strong></p>
-	<%end%>
+	<% if user_signed_in? %>
+		<% if @product.cart_by(current_user) %>
+			<%= link_to carts_path  do %>
+				<% @product.cart_add(current_user) %>
+			　　<p style="text-align: right;"><strong>カートに入れる</strong></p>
+			<% end %>
+		<%else%>
+			<%= link_to product_carts_path(@product), method: :post do %>
+				<p style="text-align: right;"><strong>カートに入れる</strong></p>
+			<% end %>
+		<%end%>
+	<%else%>
+		<%= link_to product_carts_path(@product), method: :post do %>
+			<p style="text-align: right;"><strong>カートに入れる</strong></p>
+		<%end%>
 	<%end%>
 </div>
