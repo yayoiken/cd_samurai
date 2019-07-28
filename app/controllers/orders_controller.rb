@@ -12,15 +12,15 @@ class OrdersController < ApplicationController
   end
 
   def create
-  @order = Order.new(order_params)
-  if params[:back].present?
-    render :new
-    return
-  end
-  @order.user_id = current_user.id
-  @order.save
-    carts = current_user.carts
-    carts.each do |cart|
+   @order = Order.new(order_params)
+   if params[:back].present?
+     render :new
+     return
+   end
+   @order.user_id = current_user.id
+   @order.save
+     carts = current_user.carts
+     carts.each do |cart|
       order_product = OrderProduct.new
       order_product.order_id = @order.id
       order_product.genre_id = cart.product.genre_id

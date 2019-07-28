@@ -2,12 +2,10 @@
 
 <% @genres.each do |genre|%>
   <%= genre.genre_name %>
-  <%= link_to '削除', admins_genre_path(genre), method: :delete %>
-
-  <%end%>
+  <%= link_to '削除', admins_genre_path(genre), method: :delete %><br>
+  <%end%><br>
 
 <%= form_for [:admins, @genre] do |f| %>
-    <%= f.label :genre_name, "ジャンル"%>
 	<%= f.text_field :genre_name %>
 
 	<%= f.submit "ジャンルを追加" %>

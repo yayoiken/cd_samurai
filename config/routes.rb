@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
-# エンドユーザ側
+  
+  root 'home#top'
+  
+  get '/admins', to: 'admins/products#index'
+
+  # エンドユーザ側
   devise_for :users
   resources :users do
   	get 'withdrawal', on: :member
@@ -24,15 +29,13 @@ Rails.application.routes.draw do
     :sessions => 'admins/sessions'
 }
   namespace :admins do
-   get '/' => 'products#index'
    resources :products
    resources :users
   # ジャンル情報
    resources :genres, only: [:index,:create,:destroy]
-  # TOP画面
-    end
-    root 'home#top'
-    # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  end
+
+  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
 end
 
