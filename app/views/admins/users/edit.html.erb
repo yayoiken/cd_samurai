@@ -1,5 +1,5 @@
 <h2>ユーザー情報編集</h2>
-<%= form_for(@user) do |f| %>
+<%= form_for [:admins, @user] do |f| %>
 <div class="field">
 <%= f.label "名前" %>
 <label>姓
