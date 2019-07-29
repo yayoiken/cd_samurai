@@ -29,11 +29,10 @@
           <label>郵便番号 : 〒<%= address.postal_code %></label><br>
           <label>住所 : <%= address.address %></label><br>
           <label>電話番号 : <%= address.tel_number %></label><br>
-          <%= link_to "変更", edit_address_path(address) %>
-          <%= link_to "削除", address_path(address), method: :delete %><br>
+          <%= link_to "変更", edit_admins_address_path(address) %>
+          <%= link_to "削除", admins_address_path(address), method: :delete %><br>
         </div>
       <%end%>
-        <%= link_to "配送先を追加する", new_address_path %>
     </div>
   </div>
 
@@ -47,7 +46,7 @@
         <p style="color: blue;"><%= order.created_at %></p><br>
       <% end %>
     </div>
-    <%= link_to "退会する", withdrawal_user_path(@user) %>
+    <%= link_to "退会させる", withdrawal_admins_user_path(@user) %>
   </div>
 
 </div>
