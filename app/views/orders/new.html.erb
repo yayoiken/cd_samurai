@@ -1,8 +1,8 @@
-<h1>お支払方法・配送先選択</h1>
+<h1>お支払方法・配送先を選択してください</h1>
 
-<%= form_for @order do |f| %>
+<%= form_with model: @order, local: true, url: confirm_new_order_path  do |f| %>
 
-  <h3> 配送先指定</h3>
+  <h3> 配送先選択</h3>
 
   <%= f.collection_select :to_address, Address.where(user_id: current_user.id), :address,:address %><br>
   <%= link_to "配送先を追加", new_address_path(current_user) %>
@@ -11,5 +11,5 @@
   <h3> お支払い方法選択</h3>
   <%= f.select :payment_method, Order.payment_methods_i18n.keys.map {|k| [Order.payment_methods_i18n[k] , k]} %>
 
-  <%= f.submit %>
+  <%= f.submit '購入確認画面へ' %>
 <%end%>

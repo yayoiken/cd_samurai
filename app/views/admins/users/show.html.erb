@@ -1,7 +1,6 @@
-<div class="row content">
-  <div class="col-xs-10">
+<div class="col-xs-10">
   <h1> マイページ</h1>
-    <div class="col-xs-5 border" style="margin-right: 50px;">
+    <div class="col-xs-5 border">
       <h4> ユーザ情報</h4>
       <div class="field">
         <label>
@@ -15,11 +14,10 @@
         <% else %>
           <label>生年月日 : <%= @user.birth_date.strftime("%Y年%m月%d日") %></label><br>
         <% end %>
-        <label>最終更新日 : <%= @user.updated_at.strftime("%Y年%m月%d日") %></label>
       </div>
-      <%= link_to "編集" , edit_admins_user_path(@user) %>
+      <%= link_to "編集" , edit_user_path(@user) %>
     </div>
-
+    <div class="col-xs-1"></div>
     <div class="col-xs-6 border">
       <h4> 配送先</h4>
       <% @user.addresses.each_with_index do |address,i|%>
@@ -37,17 +35,36 @@
     </div>
   </div>
 
-  <div class="col-xs-10">
+  <div class="col-xs-10 border">
     <h2> 購入履歴一覧</h2>
-    <div class="border">
       <% @user.orders.each do |order| %>
-        <%= order.payment_method_i18n %><br>
-        <%= order.to_address %><br>
-        <div class="border"></div>
-        <p style="color: blue;"><%= order.created_at %></p><br>
+        <% order.order_products.each do |op| %>
+          <div class="col-xs-3">
+            <%= attachment_image_tag op, :product_image, :fill, 100, 100 %>
+          </div>
+          <div class="col-xs-9">
+            <p>
+            <strong>CD/アルバム名</strong><br>
+                <%= op.cd_title %><br>
+            <strong>アーティスト名</strong><br>
+                <%= op.artist_name %><br>
+            <strong>価格</strong>
+                税込<%= op.price %>円
+            </p>
+            <p style="float: right;">
+                <%= link_to "注文内容確認",admins_order_path(order) %>
+            </p>
+            <strong style="color: blue;">購入日<%= op.created_at.strftime("%Y年%m月%d日") %></strong>
+          <div class="col-xs-12 border" style="margin-bottom: 30px;">
+          </div>
+        <% end %>
       <% end %>
-    </div>
-    <%= link_to "退会する", withdrawal_user_path(@user) %>
+      </div>
+
   </div>
 
-</div>
+  <div class="col-xs-12" style="margin-top: 100px;">
+    <%= link_to withdrawal_user_path(@user) do %>
+      <p style="float:right; color: red;">退会する</p>
+    <% end %>
+  </div>

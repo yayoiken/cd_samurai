@@ -1,5 +1,10 @@
 Rails.application.routes.draw do
-# エンドユーザ側
+  
+  root 'home#top'
+  
+  get '/admins', to: 'admins/products#index'
+
+  # エンドユーザ側
   devise_for :users
   resources :users do
   	get 'withdrawal', on: :member
@@ -9,7 +14,8 @@ Rails.application.routes.draw do
   resources :addresses
 # 商品
   resources :orders, only: [:new,:show,:create] do
-    resources :order_products, only: [:index,:new,:show,:create]
+    post :confirm, action: :confirm, on: :new
+    resources :order_products, only: [:new,:show,:create]
   end
   #cart情報
   resources :products do
@@ -23,15 +29,14 @@ Rails.application.routes.draw do
     :sessions => 'admins/sessions'
 }
   namespace :admins do
-   get '/' => 'products#index'
    resources :products
    resources :users
+   resources :orders
   # ジャンル情報
    resources :genres, only: [:index,:create,:destroy]
-  # TOP画面
-    end
-    root 'home#top'
-    # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  end
+
+  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
 end
 

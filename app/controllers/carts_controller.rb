@@ -6,7 +6,6 @@ class CartsController < ApplicationController
   end
 
   def create
-
 	  @product = Product.find(params[:product_id])
     @cart = current_user.carts.new(product_id: @product.id)
     @cart.save
@@ -15,11 +14,11 @@ class CartsController < ApplicationController
 
   def update_all
     params.permit!
-    params[:cart].keys.each do |id|
+    params[:carts].keys.each do |id|
     @cart = Cart.find(id.to_i)
-    @cart.update_attributes(params[:cart][id])
+    @cart.update_attributes(params[:carts][id])
     end
-  redirect_to new_order_path
+    redirect_to new_order_path
   end
 
   def destroy
