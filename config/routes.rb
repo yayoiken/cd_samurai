@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
   root 'home#top'
-
+  get 'after_login_to_post', to: 'home#after_login_to_post'
   get '/admins', to: 'admins/products#index'
 
   # エンドユーザ側
@@ -22,7 +22,7 @@ Rails.application.routes.draw do
     resource :carts, only: [:create]
   end
   match 'carts/all' => 'carts#update_all', :as => :update_all, :via => :put
-  resources :carts, only: [:index,:destroy]
+  resources :carts, only: [:index,:destroy,:create]
 
 # 管理者側
   devise_for :admins, controllers: {

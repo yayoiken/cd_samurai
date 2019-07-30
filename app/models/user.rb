@@ -7,6 +7,7 @@ class User < ApplicationRecord
   has_many :addresses, dependent: :destroy
   has_many :carts, dependent: :destroy
   has_many :orders, dependent: :destroy
+  has_many :view_histories, dependent: :destroy
 
   enum gender: {man:0, woman:1, custom:2}
   # 論理削除
