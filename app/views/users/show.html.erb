@@ -8,9 +8,14 @@
          (<%= @user.last_name_kana + @user.first_name_kana %>)
         </label><br>
         <label>メールアドレス : <%= @user.email %></label><br>
-        <label>性別 : <%= @user.gender_i18n %></label><br>
+        <% if @user.gender == nil %>
+          <label>性別 : 未登録</label><br>
+        <% else %>
+          <label>性別 : <%= @user.gender_i18n %></label><br>
+        <% end %>
+
         <% if @user.birth_date == nil %>
-          <label>生年月日 : </label><br>
+          <label>生年月日 : 未登録</label><br>
         <% else %>
           <label>生年月日 : <%= @user.birth_date.strftime("%Y年%m月%d日") %></label><br>
         <% end %>
@@ -39,10 +44,9 @@
     <h2> 購入履歴一覧</h2>
       <% @user.orders.each do |order| %>
         <% order.order_products.each do |op| %>
-          <div class="col-xs-3">
+          <div style="float: left;">
             <%= attachment_image_tag op, :product_image, :fill, 100, 100 %>
           </div>
-          <div class="col-xs-9">
             <p>
             <strong>CD/アルバム名</strong><br>
                 <%= op.cd_title %><br>

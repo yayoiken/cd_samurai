@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
-  
+
   root 'home#top'
-  
+
   get '/admins', to: 'admins/products#index'
 
   # エンドユーザ側
@@ -30,8 +30,11 @@ Rails.application.routes.draw do
 }
   namespace :admins do
    resources :products
-   resources :users
    resources :orders
+   resources :addresses
+   resources :users do
+     get 'withdrawal', on: :member
+   end
   # ジャンル情報
    resources :genres, only: [:index,:create,:destroy]
   end

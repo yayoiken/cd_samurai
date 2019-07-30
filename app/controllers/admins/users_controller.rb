@@ -1,5 +1,4 @@
 class Admins::UsersController < Admins::ApplicationController
-  before_action :authenticate_admin!
 
   def index
     @users = User.with_deleted
@@ -18,13 +17,12 @@ class Admins::UsersController < Admins::ApplicationController
 		@user_id = @user.id
 		if @user.update(user_params)
 			flash[:notice] = "You have updated user successfully."
-			redirect_to admins_products_path
+			redirect_to admins_user_path(@user)
 		else
 			flash[:notice] = "error."
 			render("users/edit")
 		end
   end
-  
 
   def destroy
    @user = User.find(params[:id])
@@ -33,9 +31,7 @@ class Admins::UsersController < Admins::ApplicationController
   end
 
   def withdrawal
-  end
-
-  def ordered
+    @user = User.find(params[:id])
   end
 
   private

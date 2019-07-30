@@ -21,12 +21,12 @@
 				    ディスク<!-- ディスク番号 --><% i += 1 %><%= i %>
 				  </strong>
 					<%= disc.disc_title %><br>
-					<% disc.product_disc_songs.each_with_index do |song,i| %>
 					<span class="caret"></span>
 			    </button>
-			</div>
 			<ul class="dropdown-menu" role="menu">
-					<li role="presentation"><strong>
+					<li role="presentation">
+					<% disc.product_disc_songs.each_with_index do |song,i| %>
+					<strong>
 					  曲名<!-- 曲番号 --><% i += 1 %><%= i %>
 					</strong>
 					<%= song.song_name %></li>
@@ -34,7 +34,8 @@
 			</ul>
 			</div>
 		<% end %>
-
+	</div>
+	<div class="col-xs-6">
 		<strong>アーティスト名</strong>
 		<%= @product.artist_name %><br>
 		<strong>レーベル名</strong>
