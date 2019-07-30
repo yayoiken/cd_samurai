@@ -10,3 +10,18 @@
 	価格: <%= product.price%>円
   </div>
 <% end %>
+
+<h2>最近見た商品</h2>
+
+<% @histories.each do |history| %>
+
+  <div class="col-xs-3" style="text-align: center; margin-bottom: 10px;">
+  	<%= link_to product_path(history.product) do %>
+	  <%= attachment_image_tag history.product, :product_image, :fill, 100, 100 %><br>
+	  <%= history.product.cd_title %><br>
+	<%end%>
+
+	価格: <%= history.product.price%>円
+  </div>
+<% end %>
+

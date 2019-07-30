@@ -1,29 +1,29 @@
 class ApplicationController < ActionController::Base
   before_action :configure_sign_up_params, if: :devise_controller?
 
-  protect_from_forgery with: :exception
+  before_action :store_current_location, unless: :devise_controller?
 
-  helper_method :current_product
+  protect_from_forgery with: :null_session
 
   before_action :set_search
 
-  after_action  :store_location
-
-  def store_location
-    if (request.fullpath != "/users/sign_in" &&
-        request.fullpath != "/users/sign_up" &&
-        request.fullpath !~ Regexp.new("\\A/users/password.*\\z") &&
-        !request.xhr?) # don't store ajax calls
-      session[:previous_url] = request.fullpath 
-    end
+  def after_sign_in_path_for(resource)
+   stored_location_for(resource) || root_path
   end
 
-
+  def after_sign_out_path_for(resource)
+    new_user_session_path
+  end
 # ransack
   def set_search
     @search = Product.ransack(params[:q]) #ransackメソッド推奨
     @search_products = @search.result
   end
+
+ private
+   def store_current_location
+     store_location_for(:user, request.url)
+   end
 
 
 protected
