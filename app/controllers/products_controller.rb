@@ -2,7 +2,9 @@ class ProductsController < ApplicationController
 
     def index
         @products = Product.all
+      if user_signed_in?
         @histories = ViewHistory.where(user_id: current_user.id).order(created_at: "DESC").limit(5)
+      end
     end
 
     def show

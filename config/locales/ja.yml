@@ -10,7 +10,11 @@ ja:
       card: クレジット
       bank: 銀号振込
       pay: 代引
-
+  order_product:
+    ship_status:
+      reception: 受付
+      preparing: 商品準備中
+      shipped: 出荷済
  date:
     month_names: [~, 1月, 2月, 3月, 4月, 5月, 6月, 7月, 8月, 9月, 10月, 11月, 12月]
 

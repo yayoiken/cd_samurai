@@ -9,6 +9,9 @@ class OrdersController < ApplicationController
 
   def show
     @order = Order.find(params[:id])
+    @order.order_products.each do |op|
+      @genre = Genre.find(op.genre_id)
+    end
   end
 
   def create

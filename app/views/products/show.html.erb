@@ -15,19 +15,27 @@
 	<div class="col-xs-6">
 		<h3> CD/アルバム情報</h3>
 		<% @product.product_discs.each_with_index do |disc,i| %>
-		  <strong>
-		    ディスク<!-- ディスク番号 --><% i += 1 %><%= i %>
-		  </strong>
-			<%= disc.disc_title %><br>
-			<% disc.product_disc_songs.each_with_index do |song,i| %>
-				<strong>
-				  曲名<!-- 曲番号 --><% i += 1 %><%= i %>
-				</strong>
-				<%= song.song_name %><br>
-			<% end %>
-
+		  	<div class="dropdown">
+		  	    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">
+				  <strong>
+				    ディスク<!-- ディスク番号 --><% i += 1 %><%= i %>
+				  </strong>
+					<%= disc.disc_title %><br>
+					<span class="caret"></span>
+			    </button>
+			<ul class="dropdown-menu" role="menu">
+					<li role="presentation">
+					<% disc.product_disc_songs.each_with_index do |song,i| %>
+					<strong>
+					  曲名<!-- 曲番号 --><% i += 1 %><%= i %>
+					</strong>
+					<%= song.song_name %></li>
+				<% end %>
+			</ul>
+			</div>
 		<% end %>
-
+	</div>
+	<div class="col-xs-6">
 		<strong>アーティスト名</strong>
 		<%= @product.artist_name %><br>
 		<strong>レーベル名</strong>
