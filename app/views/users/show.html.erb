@@ -19,6 +19,7 @@
         <% else %>
           <label>生年月日 : <%= @user.birth_date.strftime("%Y年%m月%d日") %></label><br>
         <% end %>
+        
       </div>
       <%= link_to "編集" , edit_user_path(@user) %>
     </div>
@@ -42,7 +43,7 @@
 
   <div class="col-xs-10 border">
     <h2> 購入履歴一覧</h2>
-      <% @user.orders.each do |order| %>
+      <% @user.orders.order(created_at: "DESC").each do |order| %>
         <% order.order_products.each do |op| %>
           <div style="float: left;">
             <%= attachment_image_tag op, :product_image, :fill, 100, 100 %>
@@ -63,8 +64,6 @@
           </div>
         <% end %>
       <% end %>
-      </div>
-
   </div>
 
   <div class="col-xs-12" style="margin-top: 100px;">
