@@ -1,10 +1,15 @@
 <h2> 注文内容詳細</h2>
 <% @order.order_products.each do |op| %>
-  <div class="col-xs-10">
+  <div class="col-xs-10" style="margin-bottom: 50px;">
     <div class="col-xs-4">
-      <%= attachment_image_tag op, :product_image, :fill, 200, 200 %><br>
+      <%= attachment_image_tag op, :product_image, :fill, 150, 150 %><br>
       <h4><strong>配送状況</strong><br>
-        <%=  op.ship_status_i18n %></h4>
+      <%= form_with model: op, local: true, url: admins_order_path(@order) do |f| %>
+        <%= fields_for op do |pf| %>
+          <%= pf.select :ship_status, OrderProduct.ship_statuses_i18n.keys.map {|k| [OrderProduct.ship_statuses_i18n[k] , k]} %>
+        <% end %>
+        <%= f.submit "更新する" %></h4>
+      <% end %>
     </div>
 
     <div class="col-xs-1"></div>

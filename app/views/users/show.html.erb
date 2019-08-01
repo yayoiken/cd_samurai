@@ -19,7 +19,7 @@
         <% else %>
           <label>生年月日 : <%= @user.birth_date.strftime("%Y年%m月%d日") %></label><br>
         <% end %>
-        
+
       </div>
       <%= link_to "編集" , edit_user_path(@user) %>
     </div>
@@ -55,6 +55,18 @@
                 <%= op.artist_name %><br>
             <strong>価格</strong>
                 税込<%= op.price %>円
+
+            <% if op.ship_status_i18n == "受付" %>
+            <span style="float: right; color: blue;">
+              <%= op.ship_status_i18n %></span>
+            <% elsif op.ship_status_i18n == "商品準備中" %>
+              <span style="float: right; color: green;">
+              <%= op.ship_status_i18n %></span>
+            <% else %>
+              <span style="float: right; color: red;">
+              <%= op.ship_status_i18n %></span>
+            <% end %>
+
             </p>
             <p style="float: right;">
                 <%= link_to "注文内容確認", order_path(order) %>
