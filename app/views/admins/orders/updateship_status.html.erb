@@ -1,0 +1,6 @@
+<%= form_for @order.order_proroduct do |f| %>
+
+        <%= f.select :ship_status, OrderProduct.ship_status_i18n.keys.map {|k| [OrderProduct.ship_status_i18n[k] , k]} %>
+        <%= f.submit "更新" %>
+
+<% end %>

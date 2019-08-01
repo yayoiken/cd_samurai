@@ -10,11 +10,14 @@ class Admins::OrdersController < ApplicationController
   def update
   	@order = Order.find(params[:id])
   	@order.order_products.each do |op|
-  	  @ship_status = op.ship_status
+  	  op.update(order_product_params)
   	end
-  	@ship_status.save
   	redirect_to admins_orders_path
 
+  end
+
+  def order_product_params
+	params.require(:order_product).permit(:ship_status)
   end
 
 end

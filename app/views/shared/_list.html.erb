@@ -25,7 +25,7 @@
     </ul>
     <dl class="searchbox" style="padding-top: 15px;">
       <%= search_form_for @search, url: products_path do |f| %>
-        <dt><%= f.text_field :cd_title_cont ,placeholder: '検索するCDタイトルを入力...' ,:size => "60"%>
+        <dt style="padding-left: 280px;"><%= f.text_field :cd_title_cont ,placeholder: '検索するCDタイトルを入力...' ,:size => "60"%>
         <%= f.submit ("検索") , class: 'search-btn'%></dt>
       <% end %>
     </dl>
