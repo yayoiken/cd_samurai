@@ -1,0 +1,24 @@
+<h2> 購入履歴一覧</h2>
+  <div class="col-xs-12">
+      <% @orders.each do |order| %>
+        <% order.order_products.each do |op| %>
+          <div style="float: left">
+            <%= attachment_image_tag op, :product_image, :fill, 100, 100 %>
+          </div>
+            <p>
+            <strong>CD/アルバム名</strong>
+                <%= op.cd_title %><br>
+            <strong>アーティスト名</strong>
+                <%= op.artist_name %><br>
+            <strong>価格</strong>
+                税込<%= op.price %>円
+            </p>
+            <p style="float: right;">
+                <%= link_to "注文内容確認",admins_order_path(order) %>
+            </p>
+            <strong style="color: blue;">購入日<%= op.created_at.strftime("%Y年%m月%d日") %></strong>
+          <div class="col-xs-12 border" style="margin-top: 10px; margin-bottom: 30px;">
+          </div>
+        <% end %>
+      <% end %>
+  </div>

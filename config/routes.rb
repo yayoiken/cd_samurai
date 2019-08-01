@@ -30,6 +30,7 @@ Rails.application.routes.draw do
 }
   namespace :admins do
    resources :products
+   resources :orders
    resources :addresses
    resources :users do
      get 'withdrawal', on: :member

@@ -1,0 +1,36 @@
+<h2> 注文内容詳細</h2>
+<% @order.order_products.each do |op| %>
+  <div class="col-xs-10"  style="margin-bottom: 50px;">
+    <div class="col-xs-4">
+      <%= attachment_image_tag op, :product_image, :fill, 150, 150 %><br>
+      <h4><strong>配送状況</strong><br>
+        <%= op.ship_status_i18n %></h4>
+    </div>
+
+    <div class="col-xs-1"></div>
+
+    <div class="col-xs-7 border">
+      <h3> CD/アルバム情報</h3>
+        <strong>CD/アルバム名</strong>
+        <%= op.cd_title %><br>
+        <strong>アーティスト名</strong>
+        <%= op.artist_name %><br>
+        <strong>レーベル名</strong>
+        <%= op.label_name %><br>
+        <strong>ジャンル</strong>
+        <%= op.genre.genre_name %><br>
+        <strong>価格</strong>
+        <%= op.price %>円<br>
+
+      <div class="col-xs-12 border"></div>
+
+        <strong>送付先</strong>
+          <%= @order.to_address %><br>
+        <strong>
+          購入日<%= op.created_at.strftime("%Y年%m月%d日") %>
+        </strong>
+        <div style="margin-bottom: 30px;"></div>
+    </div>
+  </div>
+<% end %>
+
