@@ -13,6 +13,8 @@
 
 <% if user_signed_in? %>
 
+<div class="col-sm-9">
+
 	<h2>最近見た商品</h2>
 
 	<% @histories.each do |history| %>
@@ -23,9 +25,11 @@
 		  <%= history.product.cd_title %><br>
 		<%end%>
 
-		価格: <%= history.product.price%>円
+		価格: <%= history.product.price %>円
 	  </div>
 	<% end %>
+
+</div>
 
 <% end %>
 

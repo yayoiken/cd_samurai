@@ -4,7 +4,18 @@
     <div class="col-xs-4">
       <%= attachment_image_tag op, :product_image, :fill, 150, 150 %><br>
       <h4><strong>配送状況</strong><br>
-        <%= op.ship_status_i18n %></h4>
+
+          <% if op.ship_status_i18n == "受付" %>
+          <span style="color: blue;">
+            <%= op.ship_status_i18n %></span>
+          <% elsif op.ship_status_i18n == "商品準備中" %>
+            <span style="color: green;">
+            <%= op.ship_status_i18n %></span>
+          <% else %>
+            <span style="color: red;">
+            <%= op.ship_status_i18n %></span>
+          <% end %>
+
     </div>
 
     <div class="col-xs-1"></div>
