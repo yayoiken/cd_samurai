@@ -9,9 +9,6 @@ class OrdersController < ApplicationController
 
   def show
     @order = Order.find(params[:id])
-    @order.order_products.each do |op|
-      @genre = Genre.find(op.genre_id)
-    end
   end
 
   def create
@@ -32,13 +29,13 @@ class OrdersController < ApplicationController
       order_product.label_name = cart.product.label_name
       order_product.product_image_id = cart.product.product_image_id
       order_product.price = cart.product.price
-      order_product.save
       @product = cart.product
       @product.stock = @product.stock - cart.quantity
       if @product.stock <= 0
-           @product.buy_capable = false
+         @product.buy_capable = false
       end
       @product.save
+      order_product.save
     end
     carts.delete_all
     redirect_to ordered_users_path
