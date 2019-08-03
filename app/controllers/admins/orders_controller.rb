@@ -5,11 +5,6 @@ class Admins::OrdersController < ApplicationController
 
   def show
     @order = Order.find(params[:id])
-    @order.order_products.each do |op|
-      @genre = Genre.find(op.genre_id)
-    end
-    @ship_status = OrderProduct.where(ship_status: :ship_status)
-
   end
 
   def update_all
