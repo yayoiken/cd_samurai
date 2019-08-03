@@ -1,41 +1,42 @@
 <h2> 注文内容詳細</h2>
-<% @order.order_products.each do |op| %>
-  <div class="col-xs-10" style="margin-bottom: 50px;">
-    <div class="col-xs-4">
-      <%= attachment_image_tag op, :product_image, :fill, 150, 150 %><br>
-      <h4><strong>配送状況</strong><br>
-      <%= form_with model: op, local: true, url: admins_order_path(@order) do |f| %>
-        <%= fields_for op do |pf| %>
+<%= form_tag admins_update_all_path, method: :put do %>
+  <div class="update_ship_status">
+    <h4><%= submit_tag "配送状況を更新する" %></h4>
+  </div>
+  <% @order.order_products.each do |op| %>
+    <div class="col-xs-10" style="margin-bottom: 50px;">
+      <div class="col-xs-4">
+        <%= attachment_image_tag op, :product_image, :fill, 150, 150 %><br>
+        <h4><strong>配送状況</strong></h4><br>
+        <%= fields_for "order_products[]", op do |pf| %>
           <%= pf.select :ship_status, OrderProduct.ship_statuses_i18n.keys.map {|k| [OrderProduct.ship_statuses_i18n[k] , k]} %>
         <% end %>
-        <%= f.submit "更新する" %></h4>
-      <% end %>
-    </div>
-
-    <div class="col-xs-1"></div>
-
-    <div class="col-xs-8 border">
-      <h3> CD/アルバム情報</h3>
+      </div>
+      <div class="col-xs-1"></div>
+      <div class="col-xs-8 border">
+        <h3> CD/アルバム情報</h3>
         <strong>CD/アルバム名</strong>
-        <%= op.cd_title %><br>
+          <%= op.cd_title %><br>
         <strong>アーティスト名</strong>
-        <%= op.artist_name %><br>
+          <%= op.artist_name %><br>
         <strong>レーベル名</strong>
-        <%= op.label_name %><br>
+          <%= op.label_name %><br>
         <strong>ジャンル</strong>
+<<<<<<< HEAD
+          <%= @genre.genre_name %><br>
+=======
         <%= op.genre.genre_name %><br>
+>>>>>>> 97daf2213d88bf6790a9ae4db13b99ee02da41e6
         <strong>価格</strong>
-        <%= op.price %>円<br>
-
+          <%= op.price %>円<br>
       <div class="col-xs-12 border"></div>
-
         <strong>送付先</strong>
-          <%= @order.to_address %><br>
+        <%= @order.to_address %><br>
         <strong>
           購入日<%= op.created_at.strftime("%Y年%m月%d日") %>
         </strong>
         <div style="margin-bottom: 30px;"></div>
+      </div>
     </div>
-  </div>
-<% end %>
-
+  <% end %>
+<%end%>

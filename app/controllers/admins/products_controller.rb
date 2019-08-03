@@ -27,6 +27,13 @@ class Admins::ProductsController < Admins::ApplicationController
 
 	def update
 	@product = Product.find(params[:id])
+	stock = params[:product]["stock"]
+	# binding.pry
+	if  stock.to_i > 0
+		@product.buy_capable = true
+	else
+		@product.buy_capable = false
+	end
 	@product.update(product_params)
 	redirect_to admins_product_path(@product)
 	end

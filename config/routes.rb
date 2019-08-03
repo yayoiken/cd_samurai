@@ -28,6 +28,7 @@ Rails.application.routes.draw do
   devise_for :admins, controllers: {
     :sessions => 'admins/sessions'
 }
+  match 'admins/all' => 'admins/orders#update_all', :as => :admins_update_all, :via => :put
   namespace :admins do
    resources :products
    resources :orders
