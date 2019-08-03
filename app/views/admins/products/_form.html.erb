@@ -50,11 +50,6 @@
 		  <%= f.number_field :stock %>
 		</div>
 		<% if action_name != 'new' %>
-		<div class="field">
-		  <%= f.label "ステータス　　　" %>
-		  <label><%= f.radio_button :buy_capable, true %> 販売中 </label>
-		  <label><%= f.radio_button :buy_capable, false %> 売り切れ</label>
-		</div>
 		<% end %>
 
 		<div class="field">

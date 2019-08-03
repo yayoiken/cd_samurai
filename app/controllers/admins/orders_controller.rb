@@ -12,13 +12,15 @@ class Admins::OrdersController < ApplicationController
 
   end
 
-  def update
-  	@order = Order.find(params[:id])
-  	@order.order_products.each do |op|
-  	  op.update(order_product_params)
+  def update_all
+    params.permit!
+    params[:order_products].keys.each do |op|
+    @order = OrderProduct.find(op.to_i)
+    @order.update_attributes(params[:order_products][op])
+  	# @order.order_products.each do |op|
+  	#   op.update(order_product_params)
   	end
   	redirect_to admins_orders_path
-
   end
 
   def order_product_params
