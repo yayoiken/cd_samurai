@@ -1,0 +1,24 @@
+<% @genres.each do |genre| %>
+	<div class="col-xs-3" style="text-align: center; margin-bottom: 10px;">
+    <%= link_to genre_path(genre) do %>	
+	<%= genre.genre_name %>
+	<% end %>
+  </div>
+<% end %>
+<div class="col-xs-8">
+<h1 style="text-align: center;">商品一覧 (<%= @genre.genre_name %>)</h1>
+<% @products.each do |product| %>
+<div class="col-xs-3" style="text-align: center; margin-bottom: 10px;">
+    <%= link_to product_path(product.id) do %>
+  <%= attachment_image_tag product, :product_image, :fill, 100, 100 %><br>
+  <%= product.cd_title %><br>
+  <%end%>
+  <p>価格: <%= product.price%>円</p>
+  <% if product.buy_capable == true %>
+      <span style="color: blue;">販売中</span>
+  <% else %>
+      <span style="color: red;">売り切れ</span>
+  <% end %>
+</div>
+<% end %>
+</div>

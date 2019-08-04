@@ -1,3 +1,10 @@
+<% @genres.each do |genre| %>
+	<div class="col-xs-3" style="text-align: center; margin-bottom: 10px;">
+    <%= link_to genre_path(genre) do %>	
+	<%= genre.genre_name %>
+	<% end %>
+  </div>
+<% end %>
 
 <div class="col-xs-8">
   <h1 style="text-align: center;"> 商品一覧</h1>
