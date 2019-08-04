@@ -17,6 +17,9 @@ Rails.application.routes.draw do
     post :confirm, action: :confirm, on: :new
     resources :order_products, only: [:new,:show,:create]
   end
+# ジャンル
+  resources :genres, only: [:index,:show]
+
   #cart情報
   resources :products do
     resource :carts, only: [:create]
